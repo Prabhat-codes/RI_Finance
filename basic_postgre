@@ -1,0 +1,42 @@
+Switch over to the postgres account on your server by typing:
+
+sudo -i -u postgres
+
+You can now access a Postgres prompt immediately by typing:
+psql
+
+This will log you into the PostgreSQL prompt, and from here you are free to interact with the database management system right away.
+
+Exit out of the PostgreSQL prompt by typing:
+\q
+
+This will bring you back to the postgres Linux command prompt.
+
+\c DATABASE NAME connects you to the database you want to in terminal 
+
+CREATE TABLE playground (
+    equip_id serial PRIMARY KEY,
+    type varchar (50) NOT NULL,
+    color varchar (25) NOT NULL,
+    location varchar(25) check (location in ('north', 'south', 'west', 'east', 'northeast', 'southeast', 'southwest', 'northwest')),
+    install_date date
+);
+
+INSERT INTO playground (type, color, location, install_date) VALUES ('slide', 'blue', 'south', '2017-04-28');
+INSERT INTO playground (type, color, location, install_date) VALUES ('swing', 'yellow', 'northwest', '2018-08-16');
+
+SELECT * FROM playground;
+
+
+DELETE FROM playground WHERE type = 'slide';
+
+Adding columns
+ALTER TABLE playground ADD last_maint date; 
+
+Dropping columns
+ALTER TABLE playground DROP last_maint;
+
+Updating specific data 
+UPDATE playground SET color = 'red' WHERE type = 'swing';
+
+
